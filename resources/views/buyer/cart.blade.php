@@ -38,56 +38,59 @@
 <div class="row">
     <div class="col-12">
         @if(count($cartItems) > 0)
-            <div class="card">
-                <div class="card-body">
+            <div class="card content-card">
+                <div class="card-header bg-white border-0 pt-4 ps-4">
+                    <h5 class="mb-0 fw-bold">Items in Cart</h5>
+                </div>
+                <div class="card-body p-0">
                     <div class="table-responsive">
-                        <table class="table table-striped">
-                            <thead>
+                        <table class="table table-hover mb-0">
+                            <thead class="bg-light">
                                 <tr>
-                                    <th>Product</th>
-                                    <th>Price</th>
-                                    <th>Quantity</th>
-                                    <th>Total</th>
-                                    <th>Actions</th>
+                                    <th class="border-0 rounded-start ps-4">Product</th>
+                                    <th class="border-0">Price</th>
+                                    <th class="border-0">Quantity</th>
+                                    <th class="border-0">Total</th>
+                                    <th class="border-0 rounded-end pe-4">Actions</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach($cartItems as $cartItem)
                                 <tr>
-                                    <td>
+                                    <td class="ps-4">
                                         <div class="d-flex align-items-center">
                                             @if($cartItem['product']->image)
                                                 <img src="{{ asset('storage/' . $cartItem['product']->image) }}" 
                                                      alt="{{ $cartItem['product']->name }}" 
-                                                     class="img-thumbnail me-3" 
+                                                     class="img-thumbnail me-3 rounded shadow-sm" 
                                                      style="width: 80px; height: 80px; object-fit: cover;">
                                             @else
-                                                <div class="bg-light rounded d-flex align-items-center justify-content-center me-3" 
+                                                <div class="bg-light rounded shadow-sm d-flex align-items-center justify-content-center me-3" 
                                                      style="width: 80px; height: 80px;">
                                                     <i class="fas fa-image text-muted"></i>
                                                 </div>
                                             @endif
                                             <div>
-                                                <h6 class="mb-1">{{ $cartItem['product']->name }}</h6>
+                                                <h6 class="mb-1 fw-bold">{{ $cartItem['product']->name }}</h6>
                                                 <small class="text-muted">by {{ $cartItem['product']->farmer->name }}</small>
                                                 <br>
-                                                <small class="text-muted">Category: {{ ucfirst($cartItem['product']->category) }}</small>
+                                                <span class="badge bg-light text-dark border rounded-pill mt-1">{{ ucfirst($cartItem['product']->category) }}</span>
                                             </div>
                                         </div>
                                     </td>
-                                    <td class="align-middle">
+                                    <td class="align-middle fw-bold">
                                         Ksh {{ number_format($cartItem['product']->price, 2) }}
                                     </td>
                                     <td class="align-middle">
                                         <form action="{{ route('buyer.cart.update', $cartItem['product']) }}" method="POST" class="d-inline">
                                             @csrf
-                                            <div class="input-group input-group-sm" style="width: 120px;">
+                                            <div class="input-group input-group-sm" style="width: 140px;">
                                                 <input type="number" 
                                                        name="quantity" 
                                                        value="{{ $cartItem['quantity'] }}" 
                                                        min="1" 
                                                        max="{{ $cartItem['product']->quantity }}"
-                                                       class="form-control">
+                                                       class="form-control text-center">
                                                 <button type="submit" class="btn btn-outline-success">
                                                     <i class="fas fa-sync-alt"></i>
                                                 </button>
@@ -102,23 +105,23 @@
                                             Ksh {{ number_format($cartItem['item_total'], 2) }}
                                         </strong>
                                     </td>
-                                    <td class="align-middle">
+                                    <td class="align-middle pe-4">
                                         <form action="{{ route('buyer.cart.remove', $cartItem['product']) }}" method="POST" class="d-inline">
                                             @csrf
-                                            <button type="submit" class="btn btn-outline-danger btn-sm" 
+                                            <button type="submit" class="btn btn-outline-danger btn-sm btn-rounded" 
                                                     onclick="return confirm('Remove this item from cart?')">
-                                                <i class="fas fa-trash"></i>
+                                                <i class="fas fa-trash me-1"></i> Remove
                                             </button>
                                         </form>
                                     </td>
                                 </tr>
                                 @endforeach
                             </tbody>
-                            <tfoot>
+                            <tfoot class="bg-light">
                                 <tr>
-                                    <td colspan="3" class="text-end"><strong>Total:</strong></td>
-                                    <td colspan="2">
-                                        <strong class="text-success h5">
+                                    <td colspan="3" class="text-end py-3"><strong>Total:</strong></td>
+                                    <td colspan="2" class="py-3">
+                                        <strong class="text-success h4 mb-0">
                                             Ksh {{ number_format($total, 2) }}
                                         </strong>
                                     </td>
@@ -127,10 +130,10 @@
                         </table>
                     </div>
 
-                    <div class="row mt-4">
+                    <div class="row p-4">
                         <div class="col-md-8">
-                            <div class="alert alert-info">
-                                <h6><i class="fas fa-info-circle"></i> Important Notes</h6>
+                            <div class="alert alert-info border-0 rounded-3">
+                                <h6 class="fw-bold"><i class="fas fa-info-circle me-2"></i> Important Notes</h6>
                                 <ul class="mb-0 small">
                                     <li>Delivery costs will be calculated during checkout based on your location</li>
                                     <li>Products are reserved when added to cart but not guaranteed until purchase</li>
@@ -140,12 +143,11 @@
                         </div>
                         <div class="col-md-4 text-end">
                             <div class="d-grid gap-2">
-                                <a href="{{ route('buyer.market') }}" class="btn btn-outline-success">
-                                    <i class="fas fa-arrow-left"></i> Continue Shopping
+                                <a href="{{ route('buyer.market') }}" class="btn btn-outline-success btn-rounded">
+                                    <i class="fas fa-arrow-left me-1"></i> Continue Shopping
                                 </a>
-                                {{-- FIXED: Use checkout.cart route --}}
-                                <a href="{{ route('buyer.checkout.cart') }}" class="btn btn-success btn-lg">
-                                    <i class="fas fa-credit-card"></i> Proceed to Checkout
+                                <a href="{{ route('buyer.checkout.cart') }}" class="btn btn-success btn-lg btn-rounded shadow-sm">
+                                    <i class="fas fa-credit-card me-1"></i> Proceed to Checkout
                                 </a>
                             </div>
                         </div>
@@ -153,13 +155,13 @@
                 </div>
             </div>
         @else
-            <div class="card">
-                <div class="card-body text-center py-5">
-                    <i class="fas fa-shopping-cart fa-4x text-muted mb-4"></i>
+            <div class="card content-card text-center py-5">
+                <div class="card-body">
+                    <i class="fas fa-shopping-cart fa-4x text-muted mb-4 opacity-50"></i>
                     <h3 class="text-muted">Your Cart is Empty</h3>
                     <p class="text-muted mb-4">Looks like you haven't added any products to your cart yet.</p>
-                    <a href="{{ route('buyer.market') }}" class="btn btn-success btn-lg">
-                        <i class="fas fa-shopping-bag"></i> Start Shopping
+                    <a href="{{ route('buyer.market') }}" class="btn btn-success btn-lg btn-rounded shadow-sm">
+                        <i class="fas fa-shopping-bag me-1"></i> Start Shopping
                     </a>
                 </div>
             </div>

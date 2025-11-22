@@ -3,64 +3,6 @@
 @section('title', 'Driver Dashboard - AgriconnectKE')
 
 @section('styles')
-<style>
-    .dashboard-stat-card {
-        border-radius: 15px;
-        padding: 25px;
-        color: white;
-        box-shadow: 0 10px 20px rgba(0,0,0,0.1);
-        transition: transform 0.3s ease;
-        border: none;
-        height: 100%;
-        position: relative;
-        overflow: hidden;
-    }
-    .dashboard-stat-card:hover {
-        transform: translateY(-5px);
-    }
-    .dashboard-stat-card .icon-bg {
-        position: absolute;
-        right: -10px;
-        bottom: -10px;
-        font-size: 5rem;
-        opacity: 0.2;
-        transform: rotate(-15deg);
-    }
-    .bg-gradient-success { background: linear-gradient(135deg, #198754 0%, #20c997 100%); }
-    .bg-gradient-primary { background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%); }
-    .bg-gradient-info { background: linear-gradient(135deg, #0dcaf0 0%, #3dd5f3 100%); }
-    .bg-gradient-warning { background: linear-gradient(135deg, #ffc107 0%, #ffca2c 100%); color: #000; }
-    
-    .content-card {
-        border-radius: 15px;
-        border: none;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        height: 100%;
-        transition: all 0.3s ease;
-    }
-    .content-card:hover {
-        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-    }
-    .content-card .card-header {
-        background-color: white;
-        border-bottom: 1px solid rgba(0,0,0,0.05);
-        padding: 1.5rem;
-        font-weight: bold;
-        font-size: 1.1rem;
-    }
-    .list-group-item {
-        border-left: none;
-        border-right: none;
-        padding: 1.5rem;
-        transition: background-color 0.2s;
-    }
-    .list-group-item:hover {
-        background-color: #f8f9fa;
-    }
-    .btn-rounded {
-        border-radius: 50px;
-    }
-</style>
 @endsection
 
 @section('content')

@@ -8,41 +8,138 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        .navbar-brand { font-weight: bold; }
-        .sidebar { 
-            min-height: calc(100vh - 56px);
-            background-color: #f8f9fa;
-            padding-top: 20px;
+        html, body {
+            height: 100%;
+            margin: 0;
         }
+        
+        body {
+            display: flex;
+            flex-direction: column;
+            background-color: #f8f9fa;
+        }
+        
+        /* Wrapper for the main content area including sidebar */
+        #app-content {
+            flex: 1 0 auto;
+            display: flex;
+            width: 100%;
+        }
+        
+        /* Sidebar styling */
+        .sidebar {
+            width: 250px; /* Fixed width for sidebar */
+            background-color: #fff;
+            border-right: 1px solid #eee;
+            flex-shrink: 0;
+            display: none; /* Hidden by default on mobile */
+        }
+        
+        @media (min-width: 768px) {
+            .sidebar {
+                display: block;
+            }
+        }
+        
+        /* Main content area */
+        main {
+            flex-grow: 1;
+            padding: 20px;
+            width: 100%; /* Ensure it takes full width available */
+            overflow-x: hidden; /* Prevent horizontal scroll */
+        }
+        
+        footer {
+            flex-shrink: 0;
+            width: 100%;
+            background-color: #212529;
+            color: white;
+            padding: 1.5rem 0;
+            margin-top: auto; /* Push to bottom */
+            position: relative;
+            z-index: 10;
+        }
+
+        /* Navbar styling */
+        .navbar-brand { font-weight: bold; }
+        
+        /* Gradient backgrounds */
+        .bg-gradient-success { background: linear-gradient(135deg, #198754 0%, #20c997 100%) !important; }
+        .bg-gradient-primary { background: linear-gradient(135deg, #0d6efd 0%, #0a58ca 100%) !important; }
+        .bg-gradient-info { background: linear-gradient(135deg, #0dcaf0 0%, #3dd5f3 100%) !important; }
+        .bg-gradient-warning { background: linear-gradient(135deg, #ffc107 0%, #ffca2c 100%) !important; }
+        .bg-gradient-danger { background: linear-gradient(135deg, #dc3545 0%, #b02a37 100%) !important; }
+        
+        /* Rounded buttons */
+        .btn-rounded { border-radius: 50px !important; }
+        
+        /* Dashboard Stat Card */
+        .dashboard-stat-card {
+            border-radius: 15px;
+            padding: 25px;
+            color: white;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+            border: none;
+            height: 100%;
+            position: relative;
+            overflow: hidden;
+        }
+        .dashboard-stat-card:hover { transform: translateY(-5px); }
+        .dashboard-stat-card .icon-bg {
+            position: absolute;
+            right: -10px;
+            bottom: -10px;
+            font-size: 5rem;
+            opacity: 0.2;
+            transform: rotate(-15deg);
+        }
+        
+        /* Content Card */
+        .content-card {
+            border-radius: 15px;
+            border: none;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            height: 100%;
+            transition: all 0.3s ease;
+            background-color: white;
+        }
+        .content-card:hover { box-shadow: 0 15px 30px rgba(0,0,0,0.1); }
+        .content-card .card-header {
+            background-color: white;
+            border-bottom: 1px solid rgba(0,0,0,0.05);
+            padding: 1.5rem;
+            font-weight: bold;
+            font-size: 1.1rem;
+            border-top-left-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+        
         .nav-link {
             color: #333;
-            padding: 10px 15px;
+            padding: 12px 20px;
             margin: 5px 0;
-            border-radius: 5px;
+            border-radius: 10px;
+            transition: all 0.2s;
         }
         .nav-link:hover, .nav-link.active {
-            background-color: #198754;
-            color: white;
+            background-color: #e8f5e9;
+            color: #198754;
+            font-weight: bold;
         }
-        main {
-            padding: 0;
+        .nav-link i {
+            width: 25px;
+            text-align: center;
+            margin-right: 10px;
         }
-        .container-fluid {
-            padding: 0;
-        }
-        @auth
-        .container-fluid {
-            padding: 0 15px;
-        }
-        main {
-            padding: 20px 0;
-        }
-        @endauth
+        
+        .container-fluid { padding: 0; }
+        @auth .container-fluid { padding: 0; } @endauth
     </style>
     @yield('styles')
 </head>
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-success shadow sticky-top">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-gradient-success shadow-sm mb-0">
         <div class="container">
             <a class="navbar-brand" href="/">🌾 AgriconnectKE</a>
             
@@ -58,84 +155,74 @@
                     <li class="nav-item">
                         <form method="POST" action="{{ route('logout') }}" class="d-inline">
                             @csrf
-                            <button type="submit" class="btn btn-outline-light btn-sm">Logout</button>
+                            <button type="submit" class="btn btn-outline-light btn-sm btn-rounded">Logout</button>
                         </form>
                     </li>
                 </ul>
             </div>
             @else
             <div class="navbar-nav ms-auto">
-                <a class="nav-link" href="{{ route('login') }}">Login</a>
-                <a class="nav-link" href="{{ route('register') }}">Register</a>
+                <a class="nav-link btn btn-outline-light btn-sm me-2 btn-rounded" href="{{ route('login') }}">Login</a>
+                <a class="nav-link btn btn-outline-light btn-sm btn-rounded" href="{{ route('register') }}">Register</a>
             </div>
             @endauth
         </div>
         @auth
-    @if(Auth::user()->role === 'buyer')
-        @php
-            $cartCount = array_sum(array_column(session('cart', []), 'quantity'));
-        @endphp
-<!-- In your navigation menu -->
-<li class="nav-item">
-    <a class="nav-link position-relative" href="{{ route('buyer.cart') }}">
-        <i class="fas fa-shopping-cart"></i>
-        Cart
-        @auth
-    <span id="mobileCartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger {{ session('cart') && count(session('cart')) > 0 ? '' : 'd-none' }}">
-        {{ session('cart') ? array_sum(array_column(session('cart'), 'quantity')) : 0 }}
-    </span>
+        @if(Auth::user()->role === 'buyer')
+        <li class="nav-item list-unstyled ms-3">
+            <a class="nav-link position-relative text-white" href="{{ route('buyer.cart') }}">
+                <i class="fas fa-shopping-cart"></i>
+                @auth
+                <span id="mobileCartCount" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger {{ session('cart') && count(session('cart')) > 0 ? '' : 'd-none' }}">
+                    {{ session('cart') ? array_sum(array_column(session('cart'), 'quantity')) : 0 }}
+                </span>
+                @endauth
+            </a>
+        </li>
+        @endif
         @endauth
-    </a>
-</li>
-    @endif
-@endauth
     </nav>
 
-    <div class="container-fluid">
-        <div class="row">
-            @auth
-            <!-- Sidebar -->
-            <div class="col-md-3 col-lg-2 sidebar d-md-block">
-                <div class="position-sticky">
-                    @if(Auth::user()->role === 'farmer')
-                        @include('partials.farmer-sidebar')
-                    @elseif(Auth::user()->role === 'buyer')
-                        @include('partials.buyer-sidebar')
-                    @elseif(Auth::user()->role === 'driver')
-                        @include('partials.driver-sidebar')
-                    @elseif(Auth::user()->role === 'admin')
-                        @include('partials.admin-sidebar')
-                    @endif
-                </div>
-            </div>
-            <!-- Main content -->
-            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
-            @else
-            <!-- Full width for unauthenticated users -->
-            <main class="col-12">
-            @endauth
-            
+    <div id="app-content">
+        @auth
+        <!-- Sidebar -->
+        <div class="sidebar d-flex flex-column p-3">
+            @if(Auth::user()->role === 'farmer')
+                @include('partials.farmer-sidebar')
+            @elseif(Auth::user()->role === 'buyer')
+                @include('partials.buyer-sidebar')
+            @elseif(Auth::user()->role === 'driver')
+                @include('partials.driver-sidebar')
+            @elseif(Auth::user()->role === 'admin')
+                @include('partials.admin-sidebar')
+            @endif
+        </div>
+        @endauth
+
+        <!-- Main content -->
+        <main>
+            <div class="container-fluid">
                 @if(session('success'))
-                    <div class="alert alert-success alert-dismissible fade show mt-3" role="alert">
+                    <div class="alert alert-success alert-dismissible fade show mb-4" role="alert">
                         {{ session('success') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
                 @endif
 
                 @if(session('error'))
-                    <div class="alert alert-danger alert-dismissible fade show mt-3" role="alert">
+                    <div class="alert alert-danger alert-dismissible fade show mb-4" role="alert">
                         {{ session('error') }}
                         <button type="button" class="btn-close" data-bs-dismiss="alert"></button>
                     </div>
                 @endif
 
                 @yield('content')
-            </main>
-        </div>
+            </div>
+        </main>
     </div>
 
     <!-- Footer -->
-    <footer class="bg-dark text-white mt-auto py-4">
+    <footer class="bg-dark text-white mt-auto py-4 border-top">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">

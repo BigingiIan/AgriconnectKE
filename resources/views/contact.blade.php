@@ -15,12 +15,14 @@
     .contact-info-card {
         transition: transform 0.3s;
         border: none;
-        border-radius: 10px;
+        border-radius: 15px;
         overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     }
     
     .contact-info-card:hover {
         transform: translateY(-5px);
+        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
     }
     
     .contact-icon {
@@ -31,15 +33,16 @@
     
     .contact-form {
         background: white;
-        border-radius: 10px;
-        box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+        border-radius: 15px;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
         padding: 2rem;
     }
     
     .map-container {
         height: 400px;
-        border-radius: 10px;
+        border-radius: 15px;
         overflow: hidden;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
     }
 </style>
 @endsection
@@ -48,7 +51,7 @@
 <!-- Hero Section -->
 <section class="contact-hero">
     <div class="container text-center">
-        <h1 class="display-4 mb-4">Contact Us</h1>
+        <h1 class="display-4 mb-4 fw-bold">Contact Us</h1>
         <p class="lead">Have questions? We're here to help!</p>
     </div>
 </section>
@@ -59,34 +62,34 @@
         <div class="row g-4">
             <div class="col-md-4">
                 <div class="card contact-info-card h-100">
-                    <div class="card-body text-center">
+                    <div class="card-body text-center p-4">
                         <div class="contact-icon">
                             <i class="fas fa-map-marker-alt"></i>
                         </div>
-                        <h4>Visit Us</h4>
-                        <p>123 Agriculture Plaza<br>Nairobi, Kenya</p>
+                        <h4 class="fw-bold">Visit Us</h4>
+                        <p class="text-muted">123 Agriculture Plaza<br>Nairobi, Kenya</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card contact-info-card h-100">
-                    <div class="card-body text-center">
+                    <div class="card-body text-center p-4">
                         <div class="contact-icon">
                             <i class="fas fa-phone"></i>
                         </div>
-                        <h4>Call Us</h4>
-                        <p>+254 700 000000<br>+254 733 000000</p>
+                        <h4 class="fw-bold">Call Us</h4>
+                        <p class="text-muted">+254 700 000000<br>+254 733 000000</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
                 <div class="card contact-info-card h-100">
-                    <div class="card-body text-center">
+                    <div class="card-body text-center p-4">
                         <div class="contact-icon">
                             <i class="fas fa-envelope"></i>
                         </div>
-                        <h4>Email Us</h4>
-                        <p>info@agriconnectke.com<br>support@agriconnectke.com</p>
+                        <h4 class="fw-bold">Email Us</h4>
+                        <p class="text-muted">info@agriconnectke.com<br>support@agriconnectke.com</p>
                     </div>
                 </div>
             </div>
@@ -100,7 +103,7 @@
         <div class="row g-4">
             <div class="col-md-6">
                 <div class="contact-form">
-                    <h2 class="mb-4">Send Us a Message</h2>
+                    <h2 class="mb-4 fw-bold">Send Us a Message</h2>
                     @if(session('success'))
                         <div class="alert alert-success">
                             {{ session('success') }}
@@ -136,7 +139,7 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                        <button type="submit" class="btn btn-success">Send Message</button>
+                        <button type="submit" class="btn btn-success btn-rounded shadow-sm px-4">Send Message</button>
                     </form>
                 </div>
             </div>

@@ -4,9 +4,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <div class="card mt-4">
-                <div class="card-header bg-success text-white">
-                    <h4 class="mb-0">Register for Farm Market</h4>
+            <div class="card content-card mt-4">
+                <div class="card-header">
+                    <i class="fas fa-user-plus me-2 text-success"></i>Register for Farm Market
                 </div>
 
                 <div class="card-body">
@@ -99,7 +99,7 @@
                             <input type="hidden" id="longitude" name="longitude" value="{{ old('longitude', 36.8219) }}">
                             
                             <div class="mt-2">
-                                <button type="button" id="getLocation" class="btn btn-outline-success btn-sm">
+                                <button type="button" id="getLocation" class="btn btn-outline-success btn-sm btn-rounded">
                                     <i class="fas fa-map-marker-alt"></i> Use My Current Location
                                 </button>
                                 <small class="text-muted ms-2" id="locationStatus">Click to detect your location for better delivery estimates</small>
@@ -107,13 +107,13 @@
                         </div>
 
                         <div class="mb-3">
-                            <button type="submit" class="btn btn-success w-100">
+                            <button type="submit" class="btn btn-success w-100 btn-rounded shadow-sm">
                                 Register
                             </button>
                         </div>
 
                         <div class="text-center">
-                            <p>Already have an account? <a href="{{ route('login') }}">Login here</a></p>
+                            <p>Already have an account? <a href="{{ route('login') }}" class="text-success fw-bold">Login here</a></p>
                         </div>
                     </form>
                 </div>

@@ -5,9 +5,9 @@
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-6">
-            <div class="card mt-4">
-                <div class="card-header bg-success text-white">
-                    <h4 class="mb-0">Login to Farm Market</h4>
+            <div class="card content-card mt-4">
+                <div class="card-header">
+                    <i class="fas fa-sign-in-alt me-2 text-success"></i>Login to Farm Market
                 </div>
 
                 <div class="card-body">
@@ -37,13 +37,13 @@
                         </div>
 
                         <div class="mb-3">
-                            <button type="submit" class="btn btn-success w-100">
+                            <button type="submit" class="btn btn-success w-100 btn-rounded shadow-sm">
                                 Login
                             </button>
                         </div>
 
                         <div class="text-center">
-                            <p>Don't have an account? <a href="{{ route('register') }}">Register here</a></p>
+                            <p>Don't have an account? <a href="{{ route('register') }}" class="text-success fw-bold">Register here</a></p>
                         </div>
                     </form>
                 </div>

@@ -14,19 +14,6 @@
         margin-top: -1.5rem; /* Offset container padding */
     }
     
-    .feature-card {
-        transition: all 0.3s ease;
-        border: none;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    }
-    
-    .feature-card:hover {
-        transform: translateY(-10px);
-        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-    }
-    
     .feature-icon {
         font-size: 3rem;
         margin-bottom: 1.5rem;
@@ -39,41 +26,20 @@
         margin: 0 auto 1.5rem;
     }
     
-    .product-card {
-        transition: all 0.3s ease;
-        border: none;
-        border-radius: 15px;
-        overflow: hidden;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    }
-    
-    .product-card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 30px rgba(0,0,0,0.1);
-    }
-    
     .product-img-wrapper {
         height: 200px;
         overflow: hidden;
     }
     
-    .product-card img {
+    .content-card img {
         transition: transform 0.5s ease;
         width: 100%;
         height: 100%;
         object-fit: cover;
     }
     
-    .product-card:hover img {
+    .content-card:hover img {
         transform: scale(1.1);
-    }
-    
-    .testimonial-card {
-        background: white;
-        border-radius: 15px;
-        padding: 30px;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        height: 100%;
     }
     
     .stat-card {
@@ -110,12 +76,12 @@
         <p class="lead mb-5 fs-4">Connect directly with local farmers for the freshest fruits, vegetables, and grains.<br>No middlemen, better prices.</p>
         @guest
         <div class="d-flex justify-content-center gap-3">
-            <a href="{{ route('register') }}" class="btn btn-success btn-lg px-5 py-3 rounded-pill shadow-lg">Get Started</a>
-            <a href="{{ route('login') }}" class="btn btn-outline-light btn-lg px-5 py-3 rounded-pill">Sign In</a>
+            <a href="{{ route('register') }}" class="btn btn-success btn-lg px-5 py-3 btn-rounded shadow-lg">Get Started</a>
+            <a href="{{ route('login') }}" class="btn btn-outline-light btn-lg px-5 py-3 btn-rounded">Sign In</a>
         </div>
         @else
         <div class="d-flex justify-content-center gap-3">
-            <a href="{{ route('products.index') }}" class="btn btn-success btn-lg px-5 py-3 rounded-pill shadow-lg">Browse Market</a>
+            <a href="{{ route('products.index') }}" class="btn btn-success btn-lg px-5 py-3 btn-rounded shadow-lg">Browse Market</a>
         </div>
         @endguest
     </div>
@@ -130,34 +96,34 @@
         </div>
         <div class="row g-4">
             <div class="col-md-4">
-                <div class="card feature-card h-100 text-center p-4">
+                <div class="card content-card h-100 text-center p-4">
                     <div class="card-body">
                         <div class="feature-icon">
                             <i class="fas fa-handshake"></i>
                         </div>
-                        <h4 class="card-title mb-3">Direct Farm-to-Table</h4>
+                        <h4 class="card-title mb-3 fw-bold">Direct Farm-to-Table</h4>
                         <p class="card-text text-muted">Connect directly with local farmers for the freshest produce at the best prices. No hidden fees.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card feature-card h-100 text-center p-4">
+                <div class="card content-card h-100 text-center p-4">
                     <div class="card-body">
                         <div class="feature-icon">
                             <i class="fas fa-truck-fast"></i>
                         </div>
-                        <h4 class="card-title mb-3">Fast Delivery</h4>
+                        <h4 class="card-title mb-3 fw-bold">Fast Delivery</h4>
                         <p class="card-text text-muted">Track your orders in real-time with our advanced GPS tracking system. Freshness guaranteed.</p>
                     </div>
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="card feature-card h-100 text-center p-4">
+                <div class="card content-card h-100 text-center p-4">
                     <div class="card-body">
                         <div class="feature-icon">
                             <i class="fas fa-tags"></i>
                         </div>
-                        <h4 class="card-title mb-3">Fair Pricing</h4>
+                        <h4 class="card-title mb-3 fw-bold">Fair Pricing</h4>
                         <p class="card-text text-muted">Transparent pricing for everyone. Farmers get paid better, buyers save more.</p>
                     </div>
                 </div>
@@ -174,26 +140,26 @@
                 <h2 class="fw-bold mb-2">Featured Products</h2>
                 <p class="text-muted mb-0">Fresh picks just for you</p>
             </div>
-            <a href="{{ route('products.index') }}" class="btn btn-outline-success rounded-pill">View All Products</a>
+            <a href="{{ route('products.index') }}" class="btn btn-outline-success btn-rounded">View All Products</a>
         </div>
         
         <div class="row g-4">
             @foreach($featuredProducts as $product)
             <div class="col-md-3">
-                <div class="card product-card h-100">
+                <div class="card content-card h-100">
                     <div class="product-img-wrapper">
                         <img src="{{ $product->image_url }}" class="card-img-top" alt="{{ $product->name }}">
                     </div>
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-start mb-2">
-                            <h5 class="card-title mb-0">{{ $product->name }}</h5>
+                            <h5 class="card-title mb-0 fw-bold">{{ $product->name }}</h5>
                             <span class="badge bg-success rounded-pill">Fresh</span>
                         </div>
                         <p class="card-text text-success fw-bold fs-5 mb-1">KES {{ number_format($product->price, 2) }}</p>
                         <small class="text-muted d-block mb-3">
                             <i class="fas fa-user-circle me-1"></i> {{ $product->farmer->name }}
                         </small>
-                        <a href="{{ route('products.show', $product) }}" class="btn btn-outline-success w-100 rounded-pill">View Details</a>
+                        <a href="{{ route('products.show', $product) }}" class="btn btn-outline-success w-100 btn-rounded">View Details</a>
                     </div>
                 </div>
             </div>

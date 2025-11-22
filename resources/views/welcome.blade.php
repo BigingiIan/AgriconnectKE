@@ -40,8 +40,8 @@
         <h1 class="display-3 fw-bold mb-4">Fresh Produce, Directly from Farmers</h1>
         <p class="lead mb-5">Connect directly with local farmers for the freshest fruits, vegetables, and grains. No middlemen, better prices.</p>
         <div class="d-flex justify-content-center gap-3">
-            <a href="{{ route('register') }}" class="btn btn-success btn-lg px-5">Get Started</a>
-            <a href="{{ route('login') }}" class="btn btn-outline-light btn-lg px-5">Login</a>
+            <a href="{{ route('register') }}" class="btn btn-success btn-lg px-5 btn-rounded shadow-sm">Get Started</a>
+            <a href="{{ route('login') }}" class="btn btn-outline-light btn-lg px-5 btn-rounded">Login</a>
         </div>
     </div>
 </div>
@@ -50,29 +50,29 @@
 <div class="container py-5">
     <div class="row text-center g-4">
         <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-sm p-4">
+            <div class="card content-card h-100 p-4">
                 <div class="card-body">
                     <i class="fas fa-tractor feature-icon"></i>
-                    <h3 class="card-title h4">For Farmers</h3>
-                    <p class="card-text">List your produce, set your prices, and reach thousands of buyers directly. Manage your inventory and sales easily.</p>
+                    <h3 class="card-title h4 fw-bold">For Farmers</h3>
+                    <p class="card-text text-muted">List your produce, set your prices, and reach thousands of buyers directly. Manage your inventory and sales easily.</p>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-sm p-4">
+            <div class="card content-card h-100 p-4">
                 <div class="card-body">
                     <i class="fas fa-shopping-basket feature-icon"></i>
-                    <h3 class="card-title h4">For Buyers</h3>
-                    <p class="card-text">Access fresh, organic produce at farm-gate prices. Bid on bulk orders or buy directly for your home or business.</p>
+                    <h3 class="card-title h4 fw-bold">For Buyers</h3>
+                    <p class="card-text text-muted">Access fresh, organic produce at farm-gate prices. Bid on bulk orders or buy directly for your home or business.</p>
                 </div>
             </div>
         </div>
         <div class="col-md-4">
-            <div class="card h-100 border-0 shadow-sm p-4">
+            <div class="card content-card h-100 p-4">
                 <div class="card-body">
                     <i class="fas fa-truck feature-icon"></i>
-                    <h3 class="card-title h4">For Drivers</h3>
-                    <p class="card-text">Earn money by delivering fresh produce. Manage your delivery schedule and track your earnings in real-time.</p>
+                    <h3 class="card-title h4 fw-bold">For Drivers</h3>
+                    <p class="card-text text-muted">Earn money by delivering fresh produce. Manage your delivery schedule and track your earnings in real-time.</p>
                 </div>
             </div>
         </div>
@@ -111,6 +111,6 @@
 <!-- Call to Action -->
 <div class="container py-5 text-center">
     <h2 class="mb-4">Ready to join the revolution?</h2>
-    <a href="{{ route('register') }}" class="btn btn-success btn-lg">Create Your Account Now</a>
+    <a href="{{ route('register') }}" class="btn btn-success btn-lg btn-rounded shadow-sm">Create Your Account Now</a>
 </div>
 @endsection
