@@ -1,0 +1,28 @@
+<!-- resources/views/partials/admin-sidebar.blade.php -->
+<ul class="nav flex-column">
+    <li class="nav-item">
+        <a class="nav-link active" href="{{ route('admin.dashboard') }}">
+            Dashboard
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.users') }}">
+            Users
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.products') }}">
+            Products
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.orders') }}">
+            Orders
+        </a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{ route('admin.track-drivers') }}">
+            Track Drivers
+        </a>
+    </li>
+</ul>
